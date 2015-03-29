@@ -1,32 +1,33 @@
 console.log("here");
-var xhr = new XMLHttpRequest();
-xhr.open("GET", "/requests", true);
-xhr.onreadystatechange = function() {
-  if (xhr.readyState == 4) {
 
+getInfo();
+
+function getInfo(){
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "/randAlbumPrice", true);
+xhr.onreadystatechange = function() {
+
+
+  if (xhr.readyState == 4) {
+  		convert(xhr.responseText);
   }
 }
 xhr.send();
-
-/*
-function tests(testjson){
-	data = jQuery.parseJSON(testjson);
-	console.log(data.results[0].related_links);
-	var i = 0;
-	while(i < data.results[0].related_links.length){
-		if(data.results[0].related_links[i].category == "Official_Merchandise"){
-			var rqst = data.results[0].related_links[i].url;
-			var xhr = new XMLHttpRequest();
-			var params = "url=" + rqst;
-			xhr.open("POST", "/rqst" , true);
-			xhr.onreadystatechange = function() {
-			  if (xhr.readyState == 4) {
-	
-			  }
-			}
-			xhr.send(params);
-		}
-		i = i + 1;
-	}
 }
-*/
+
+function convert(priceJson){
+	var price = jQuery.parseJSON(priceJson);
+	console.log(price.price);
+	console.log(price.name);
+	console.log(price.album);
+
+	$("#data").empty();
+
+	$("#data").append("Instead of spending " + price.tRac + " dollars on other stuff......");
+
+	var howMany = price.tRac/price.price;
+
+	$("#data").append("You could have bought " + "<b><u> " + howMany + " </u></b>" + " copies of " + price.album + ", a great album by " + price.name + ".");
+
+
+}
