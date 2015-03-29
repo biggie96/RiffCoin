@@ -22,6 +22,22 @@ def bandsprice():
 
 	print r[0]['country']
 
+	for i in range(len(r[0]['related_links'])):
+		print r[0]['related_links'][0]['category']
+		if(r[0]['related_links'][i]['category'] == "Official_Merchandise"):
+			print "yes!"
+			break
+
+	allMerch = requests.get(r[0]['related_links'][i]['url'])
+	allMerch = allMerch.text
+	print allMerch
+
+
+
+
+
+
+
 	return mr
 
 
