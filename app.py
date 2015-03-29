@@ -15,10 +15,16 @@ def home():
 
 @app.route('/requests', methods=['GET'])
 def bandsprice():
-	print "here"
 	r = requests.get("http://perelste.in:8001/api/bands/id/72")
-	r = jsonify(results = r.json())
-	return r
+	mr = jsonify(results = r.json())
+	r = r.json()
+
+
+	print r[0]['country']
+
+	return mr
+
+
 	
 
 if __name__ == '__main__':
